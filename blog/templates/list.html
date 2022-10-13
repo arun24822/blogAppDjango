@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+{% block title %}My Blog{% endblock %}
+{% block content %}
+  <h1 class="bg-midnight">My Blog</h1>
+  <div class="flex justify-between flex-column">
+    {% for post in posts %}
+      <div class="shadow-xl px-4 pt-4 my-4">
+        <h2>
+          <a href="{{ post.get_absolute_url }}">
+            {{ post.title }}
+          </a>
+        </h2>
+        <p class="date">
+          Published {{ post.publish }} by {{ post.author }}
+        </p>
+        {{ post.text|truncatewords:30|linebreaks }}
+      </div>
+    {% endfor %}
+  </div>
+  {% include 'pagination.html' with page=posts %}
+{% endblock %}
